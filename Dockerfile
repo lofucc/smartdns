@@ -52,6 +52,14 @@ RUN cd /build/smartdns && \
     cd / && rm -rf /build
 
 FROM busybox:stable-musl
+
+# apk add tzdata and set default timezone to Asia/Shanghai
+RUN apk add --no-cache tzdata && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+
+ENV TZ=Asia/Shanghai
+
 COPY --from=smartdns-builder /release/ /
 EXPOSE 53/udp 6080/tcp
 VOLUME ["/etc/smartdns/", "/var/lib/smartdns/"]
