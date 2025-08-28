@@ -51,7 +51,7 @@ RUN cd /build/smartdns && \
     cp /opt/build/lib64/lib*.so* /release/usr/local/lib/smartdns/lib/ -a 2>/dev/null || true && \
     cd / && rm -rf /build
 
-FROM busybox:stable-musl
+FROM alpine:latest
 
 # apk add tzdata and set default timezone to Asia/Shanghai
 RUN apk add --no-cache tzdata && \
